@@ -1,7 +1,14 @@
 #!/bin/sh
 
-# get user token
-token=$(cat sonar-project.properties | sed 's/sonar.login=\(.*\)/\1/;t;d')
+# try get user token from input args
+
+token=$(echo $@ | sed 's/.*sonar.login=\([^ ]*\).*/\1/g')
+
+if test -z "$token"
+then
+    # else try get token from sonar properties file
+    token=$(cat sonar-project.properties | sed 's/sonar.login=\(.*\)/\1/;t;d')
+fi
 
 get() {
 # in url pass additional auth - ..//password@:
