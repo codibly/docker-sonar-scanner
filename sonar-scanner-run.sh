@@ -49,9 +49,6 @@ if [ ! -z ${SONAR_BRANCH+x} ]; then
   COMMAND="$COMMAND -Dsonar.branch.name=$SONAR_BRANCH"
 fi
 
-#to show in gitlab-ci command
-echo $COMMAND $@;
-
 $COMMAND $@
 
 . quality-gate.sh $@;
