@@ -51,5 +51,8 @@ fi
 
 $COMMAND $@
 
-. quality-gate.sh $@;
+# if preview mode - we can't check sonar quality gate result
+if ! echo "$@" | grep -q "Dsonar.analysis.mode=preview"; then
+  . quality-gate.sh $@;
+fi
 
